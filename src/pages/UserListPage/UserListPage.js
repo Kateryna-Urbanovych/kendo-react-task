@@ -1,5 +1,13 @@
 import React from "react";
 
+import { users } from "./users";
+
 export const UserListPage = () => {
-  return <h1>UserListPage</h1>;
+  return (
+    <>
+      {users.map(({ userName }) => (
+        <p>{userName}</p>
+      ))}
+    </>
+  );
 };
