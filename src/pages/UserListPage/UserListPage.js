@@ -1,23 +1,23 @@
 import React, { useState } from "react";
 import { Grid, GridColumn as Column } from "@progress/kendo-react-grid";
-import { orderBy } from "@progress/kendo-data-query";
+import { process } from "@progress/kendo-data-query";
+import { Sort, SortFilter } from "./columnMenu";
 import { users } from "./users";
 
-const initialSort = [
-  {
-    field: "id",
-    dir: "asc",
-  },
-];
+const updatedUsers = users.map((user) => ({
+  ...user,
+  enabled: user.enabled ? "Yes" : "No",
+}));
+
+const createDataState = (dataState) => {
+  return {
+    result: process(updatedUsers.slice(0), dataState),
+    dataState: dataState,
+  };
+};
 
 const rowRender = (trElement, props) => {
   const enabled = props.dataItem.enabled;
-  // const green = {
-  //   backgroundColor: "rgb(55, 180, 0,0.32)",
-  // };
-  // const red = {
-  //   backgroundColor: "rgb(243, 23, 0, 0.32)",
-  // };
   const black = {
     color: "black",
   };
@@ -25,7 +25,7 @@ const rowRender = (trElement, props) => {
     color: "red",
   };
   const trProps = {
-    style: enabled ? black : red,
+    style: enabled === "Yes" ? black : red,
   };
   return React.cloneElement(
     trElement,
@@ -35,7 +35,19 @@ const rowRender = (trElement, props) => {
 };
 
 export const UserListPage = () => {
-  const [sort, setSort] = useState(initialSort);
+  let initialState = createDataState({
+    take: 8,
+    skip: 0,
+  });
+
+  const [result, setResult] = useState(initialState.result);
+  const [dataState, setDataState] = useState(initialState.dataState);
+
+  const dataStateChange = (event) => {
+    let updatedState = createDataState(event.dataState);
+    setResult(updatedState.result);
+    setDataState(updatedState.dataState);
+  };
 
   return (
     <>
@@ -46,20 +58,23 @@ export const UserListPage = () => {
           cursor: "pointer",
         }}
         rowHeight={50}
-        data={orderBy(users, sort)}
+        data={result}
+        {...dataState}
+        onDataStateChange={dataStateChange}
         sortable={true}
-        sort={sort}
-        onSortChange={(e) => {
-          setSort(e.sort);
-        }}
         onRowClick={(e) => console.log(e.dataItem)}
         rowRender={rowRender}
       >
-        <Column field='id' title='User ID' />
-        <Column field='userName' title='User Name' />
-        <Column field='fullName' title='Full Name' />
-        <Column field='lastLogin' title='Last Login' />
-        <Column field='enabled' title='Enabled' />
+        <Column field='id' title='User ID' width='150px' columnMenu={Sort} />
+        <Column
+          field='userName'
+          title='User Name'
+          filter={"text"}
+          columnMenu={SortFilter}
+        />
+        <Column field='fullName' title='Full Name' columnMenu={Sort} />
+        <Column field='lastLogin' title='Last Login' columnMenu={Sort} />
+        <Column field='enabled' title='Enabled' columnMenu={Sort} />
       </Grid>
     </>
   );
