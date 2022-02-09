@@ -2,6 +2,8 @@ export const users = [
   {
     id: 1,
     userName: "Leon",
+    firstName: "Leon",
+    lastName: "Matis",
     fullName: "Leon Matis",
     lastLogin: "07.02.2022",
     enabled: true,
@@ -9,6 +11,8 @@ export const users = [
   {
     id: 2,
     userName: "Bryan",
+    firstName: "Bryan",
+    lastName: "Sanchez",
     fullName: "Bryan Sanchez",
     lastLogin: "05.02.2022",
     enabled: false,
@@ -16,6 +20,8 @@ export const users = [
   {
     id: 3,
     userName: "Kenley",
+    firstName: "Kenley",
+    lastName: "Anderson",
     fullName: "Kenley Anderson",
     lastLogin: "01.02.2022",
     enabled: true,
@@ -23,6 +29,8 @@ export const users = [
   {
     id: 4,
     userName: "Oriana",
+    firstName: "Oriana",
+    lastName: "Price",
     fullName: "Oriana Price",
     lastLogin: "20.01.2022",
     enabled: true,
@@ -30,6 +38,8 @@ export const users = [
   {
     id: 5,
     userName: "Gabrielle",
+    firstName: "Gabrielle",
+    lastName: "Ross",
     fullName: "Gabrielle Ross",
     lastLogin: "10.01.2022",
     enabled: false,
@@ -37,6 +47,8 @@ export const users = [
   {
     id: 6,
     userName: "qwe",
+    firstName: "qwe",
+    lastName: "qwe",
     fullName: "qwe qwe",
     lastLogin: "10.01.2022",
     enabled: null,
