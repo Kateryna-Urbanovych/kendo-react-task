@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Button } from "@progress/kendo-react-buttons";
-import { DialogNewUser } from "../DialogNewUser/DialogNewUser";
+import { DialogNewUser } from "../Dialog/DialogNewUser";
 import s from "./ButtonNewUser.module.scss";
 
 export const ButtonNewUser = () => {

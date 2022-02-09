@@ -10,7 +10,7 @@ import {
 } from "./validator";
 
 export const FormNewUser = () => {
-  const handleSubmit = (dataItem) => console.log(dataItem);
+  const handleSubmit = (dataItem) => console.log("dataCreateUser", dataItem);
 
   return (
     <Form
@@ -19,7 +19,7 @@ export const FormNewUser = () => {
       render={(formRenderProps) => (
         <FormElement
           style={{
-            width: 500,
+            width: 450,
           }}
         >
           <fieldset className={"k-form-fieldset"}>

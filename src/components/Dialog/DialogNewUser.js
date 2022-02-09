@@ -1,13 +1,13 @@
 import React from "react";
 import { Dialog } from "@progress/kendo-react-dialogs";
-import { FormNewUser } from "../FormNewUser/FormNewUser";
+import { FormNewUser } from "../Form/FormNewUser";
 
 export const DialogNewUser = ({ onClose }) => {
   return (
     <Dialog
       title={"Dialog New User"}
       height={500}
-      width={550}
+      width={500}
       onClose={() => onClose(false)}
       themeColor='tertiary'
     >
