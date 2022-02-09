@@ -1,26 +1,17 @@
 import React from "react";
-import { Dialog, DialogActionsBar } from "@progress/kendo-react-dialogs";
+import { Dialog } from "@progress/kendo-react-dialogs";
+import { FormNewUser } from "../FormNewUser/FormNewUser";
 
 export const DialogNewUser = ({ onClose }) => {
   return (
     <Dialog
-      title={"Form"}
-      height={400}
-      width={600}
+      title={"Dialog New User"}
+      height={500}
+      width={550}
       onClose={() => onClose(false)}
       themeColor='tertiary'
     >
-      <p>
-        Add new user with fields: UserName, FirstName, LastName and Enabled.
-      </p>
-      <DialogActionsBar>
-        <button
-          className='k-button k-button-md k-rounded-md k-button-solid k-button-solid-base'
-          onClick={() => console.log("add new user")}
-        >
-          Add new user
-        </button>
-      </DialogActionsBar>
+      <FormNewUser />
     </Dialog>
   );
 };
