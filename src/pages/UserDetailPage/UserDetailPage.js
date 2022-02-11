@@ -1,11 +1,12 @@
 import React, { useState } from "react";
+import { useLocation } from "react-router-dom";
 import { Grid, GridColumn as Column } from "@progress/kendo-react-grid";
 import { Typography } from "@progress/kendo-react-common";
 import { DialogUpdateUser } from "../../components/Dialog/DialogUpdateUser";
 
-import { users } from "../UserListPage/users";
-const activeUserId = 1;
-const activeUser = users.find((user) => user.id === activeUserId);
+// import { users } from "../UserListPage/users";
+// const activeUserId = 1;
+// const activeUser = users.find((user) => user.id === activeUserId);
 
 const EditCommandCell = (props) => {
   return (
@@ -21,17 +22,18 @@ const EditCommandCell = (props) => {
 };
 
 export const UserDetailPage = () => {
+  const location = useLocation();
+  const activeUser = location.state;
   const { userName, lastLogin } = activeUser;
 
   const [openFormUpdate, setOpenFormUpdate] = useState(false);
   const [data, setData] = useState(activeUser);
-  console.log("dataActiveUser", data);
   // const [editItem, setEditItem] = useState({
   //   ProductID: 1,
   // });
 
   const handleSubmit = (event) => {
-    console.log("event", event);
+    console.log("eventSubmitFormUpdate", event);
     // let newData = data.map((item) => {
     //   if (event.ProductID === item.ProductID) {
     //     item = { ...event };

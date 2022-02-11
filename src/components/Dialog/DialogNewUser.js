@@ -11,7 +11,7 @@ export const DialogNewUser = ({ onClose }) => {
       onClose={() => onClose(false)}
       themeColor='tertiary'
     >
-      <FormNewUser />
+      <FormNewUser onClose={onClose} />
     </Dialog>
   );
 };

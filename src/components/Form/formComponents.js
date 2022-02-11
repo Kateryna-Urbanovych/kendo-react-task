@@ -1,7 +1,7 @@
 import React from "react";
 import { FieldWrapper } from "@progress/kendo-react-form";
 import { Input, Checkbox } from "@progress/kendo-react-inputs";
-import { Label, Error, Hint } from "@progress/kendo-react-labels";
+import { Label, Error } from "@progress/kendo-react-labels";
 
 export const FormInput = (fieldRenderProps) => {
   const {
@@ -11,14 +11,11 @@ export const FormInput = (fieldRenderProps) => {
     id,
     valid,
     disabled,
-    hint,
     type,
     optional,
     ...others
   } = fieldRenderProps;
   const showValidationMessage = touched && validationMessage;
-  const showHint = !showValidationMessage && hint;
-  const hintId = showHint ? `${id}_hint` : "";
   const errorId = showValidationMessage ? `${id}_error` : "";
   return (
     <FieldWrapper>
@@ -36,10 +33,8 @@ export const FormInput = (fieldRenderProps) => {
           type={type}
           id={id}
           disabled={disabled}
-          ariaDescribedBy={`${hintId} ${errorId}`}
           {...others}
         />
-        {showHint && <Hint id={hintId}>{hint}</Hint>}
         {showValidationMessage && (
           <Error id={errorId}>{validationMessage}</Error>
         )}
@@ -49,7 +44,7 @@ export const FormInput = (fieldRenderProps) => {
 };
 
 export const FormCheckbox = (fieldRenderProps) => {
-  const { id, disabled, hint, optional, label, visited, modified, ...others } =
+  const { id, disabled, optional, label, visited, modified, ...others } =
     fieldRenderProps;
   return (
     <FieldWrapper>

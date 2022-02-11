@@ -1,20 +1,10 @@
 import React, { useState } from "react";
+import { useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import { Grid, GridColumn as Column } from "@progress/kendo-react-grid";
 import { process } from "@progress/kendo-data-query";
 import { Sort, SortFilter } from "./columnMenu";
-import { users } from "./users";
-
-const updatedUsers = users.map((user) => ({
-  ...user,
-  enabled: user.enabled ? "Yes" : "No",
-}));
-
-const createDataState = (dataState) => {
-  return {
-    result: process(updatedUsers.slice(0), dataState),
-    dataState: dataState,
-  };
-};
+import { usersSelectors } from "../../redux/users";
 
 const rowRender = (trElement, props) => {
   const enabled = props.dataItem.enabled;
@@ -35,10 +25,16 @@ const rowRender = (trElement, props) => {
 };
 
 export const UserListPage = () => {
-  let initialState = createDataState({
-    take: 8,
-    skip: 0,
-  });
+  const navigate = useNavigate();
+  const users = useSelector(usersSelectors.getUpdatedUsers);
+
+  const createDataState = (dataState) => {
+    return {
+      result: process(users.slice(0), dataState),
+      dataState: dataState,
+    };
+  };
+  let initialState = createDataState({});
 
   const [result, setResult] = useState(initialState.result);
   const [dataState, setDataState] = useState(initialState.dataState);
@@ -51,6 +47,9 @@ export const UserListPage = () => {
 
   return (
     <>
+      {/* Displays no users */}
+      {/* {users.length === 0 && <h1>No users</h1>} */}
+
       <Grid
         style={{
           maxHeight: "700px",
@@ -62,7 +61,7 @@ export const UserListPage = () => {
         {...dataState}
         onDataStateChange={dataStateChange}
         sortable={true}
-        onRowClick={(e) => console.log(e.dataItem)}
+        onRowClick={(e) => navigate("/detail", { state: e.dataItem })}
         rowRender={rowRender}
       >
         <Column field='id' title='User ID' width='150px' columnMenu={Sort} />

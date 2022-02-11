@@ -8,12 +8,23 @@ import {
 } from "./validator";
 
 export const FormUpdateUser = ({ cancelEdit, item }) => {
-  const handleSubmit = (dataItem) => console.log("dataUpdateUser", dataItem);
+  const transformItem = {
+    ...item,
+    enabled: item.enabled === "Yes" ? true : false,
+  };
+
+  const handleSubmit = (dataItem) => {
+    // поменять дату
+    // обновить UserDetail
+    // обновить UserList
+    console.log("dataUpdateUser", dataItem);
+    cancelEdit();
+  };
 
   return (
     <Form
       onSubmit={handleSubmit}
-      initialValues={item}
+      initialValues={transformItem}
       validator={totalFirstAndLastNameValidator}
       render={(formRenderProps) => (
         <FormElement

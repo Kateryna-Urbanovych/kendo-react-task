@@ -1,15 +1,18 @@
 import { createReducer } from "@reduxjs/toolkit";
 import { combineReducers } from "redux";
+import usersOperations from "./users-operations";
 
-const usersReducer = createReducer(null, {});
+const { fetchUsers, addUser } = usersOperations;
 
-const filterReducer = createReducer("", {});
+const usersReducer = createReducer([], {
+  [fetchUsers.fulfilled]: (_, { payload }) => payload,
+  [addUser.fulfilled]: (state, { payload }) => [...state, payload],
+});
 
 const loadingReducer = createReducer(false, {});
 
 const rootUsersReducer = combineReducers({
   users: usersReducer,
-  filter: filterReducer,
   loading: loadingReducer,
 });
 
