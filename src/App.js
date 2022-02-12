@@ -1,7 +1,7 @@
+import "@progress/kendo-theme-default/dist/all.css";
 import React, { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { Routes, Route } from "react-router-dom";
-import "@progress/kendo-theme-default/dist/all.css";
 import { GridLayout, GridLayoutItem } from "@progress/kendo-react-layout";
 
 import { AppBarPanel } from "./components/AppBarPanel/AppBarPanel";

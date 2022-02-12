@@ -28,11 +28,23 @@ export const UserListPage = () => {
   const navigate = useNavigate();
   const initialUsers = useSelector(usersSelectors.getUpdatedUsers);
 
-  const [dataState, setDataState] = useState({
-    sort: [{ field: "id", dir: "asc" }],
-    take: 10,
-    skip: 0,
-  });
+  const createDataState = (dataState) => {
+    return {
+      result: process(initialUsers, dataState),
+      dataState: dataState,
+    };
+  };
+  let initialState = createDataState({});
+
+  const [result, setResult] = useState(initialState.result);
+  const [dataState, setDataState] = useState(initialState.dataState);
+
+  const dataStateChange = (event) => {
+    console.log(event);
+    let updatedState = createDataState(event.dataState);
+    setResult(updatedState.result);
+    setDataState(updatedState.dataState);
+  };
 
   return (
     <>
@@ -41,52 +53,28 @@ export const UserListPage = () => {
 
       <Grid
         style={{
-          maxHeight: "1500px",
+          maxHeight: "700px",
           fontSize: "20px",
           cursor: "pointer",
         }}
         rowHeight={50}
-        data={process(initialUsers, dataState)}
+        data={result}
         {...dataState}
-        onDataStateChange={(e) => {
-          setDataState(e.dataState);
-        }}
+        onDataStateChange={dataStateChange}
         sortable={true}
-        filterable={true}
         onRowClick={(e) => navigate("/detail", { state: e.dataItem.id })}
         rowRender={rowRender}
       >
-        <Column
-          field='id'
-          title='User ID'
-          width='150px'
-          // columnMenu={Sort}
-          filterable={false}
-        />
+        <Column field='id' title='User ID' width='150px' columnMenu={Sort} />
         <Column
           field='userName'
           title='User Name'
           filter={"text"}
-          // columnMenu={SortFilter}
+          columnMenu={SortFilter}
         />
-        <Column
-          field='fullName'
-          title='Full Name'
-          // columnMenu={Sort}
-          filterable={false}
-        />
-        <Column
-          field='lastLogin'
-          title='Last Login'
-          // columnMenu={Sort}
-          filterable={false}
-        />
-        <Column
-          field='enabled'
-          title='Enabled'
-          // columnMenu={Sort}
-          filterable={false}
-        />
+        <Column field='fullName' title='Full Name' columnMenu={Sort} />
+        <Column field='lastLogin' title='Last Login' columnMenu={Sort} />
+        <Column field='enabled' title='Enabled' columnMenu={Sort} />
       </Grid>
     </>
   );

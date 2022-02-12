@@ -6,7 +6,7 @@
       "firstName": "Leon",
       "lastName": "Matis",
       "fullName": "Leon Matis",
-      "lastLogin": "07.02.2022",
+      "lastLogin": 1644692863443,
       "enabled": true
     },
     {
@@ -47,12 +47,21 @@
     },
     {
       "userName": "kate",
-      "firstName": "kateryna",
+      "firstName": "kate",
       "lastName": "urb",
       "enabled": true,
-      "fullName": "kateryna urb",
-      "lastLogin": 1644538009688,
+      "fullName": "kate urb",
+      "lastLogin": 1644690392021,
       "id": 6
+    },
+    {
+      "userName": "qwe",
+      "firstName": "qwe",
+      "lastName": "qwe",
+      "enabled": true,
+      "fullName": "qwe qwe",
+      "lastLogin": 1644698382118,
+      "id": 7
     }
   ]
 }

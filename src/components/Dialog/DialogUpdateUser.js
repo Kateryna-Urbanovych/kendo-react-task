@@ -2,7 +2,7 @@ import React from "react";
 import { Dialog } from "@progress/kendo-react-dialogs";
 import { FormUpdateUser } from "../Form/FormUpdateUser";
 
-export const DialogUpdateUser = ({ cancelEdit, item }) => {
+export const DialogUpdateUser = ({ cancelEdit, onSubmit, item }) => {
   return (
     <Dialog
       title={"Dialog Update User"}
@@ -11,7 +11,7 @@ export const DialogUpdateUser = ({ cancelEdit, item }) => {
       onClose={cancelEdit}
       themeColor='tertiary'
     >
-      <FormUpdateUser cancelEdit={cancelEdit} item={item} />
+      <FormUpdateUser cancelEdit={cancelEdit} onSubmit={onSubmit} item={item} />
     </Dialog>
   );
 };

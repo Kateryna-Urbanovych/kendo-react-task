@@ -27,8 +27,25 @@ const addUser = createAsyncThunk(
   }
 );
 
+const updateUser = createAsyncThunk(
+  "users/updateUser",
+  async (updatedUser, { rejectWithValue }) => {
+    try {
+      console.log("updatedUser", updatedUser);
+      const { data } = await axios.patch(
+        `/users/${updatedUser.id}`,
+        updatedUser
+      );
+      return data;
+    } catch (error) {
+      return rejectWithValue(error);
+    }
+  }
+);
+
 const usersOperations = {
   fetchUsers,
   addUser,
+  updateUser,
 };
 export default usersOperations;

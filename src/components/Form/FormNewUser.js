@@ -4,6 +4,7 @@ import { Form, Field, FormElement } from "@progress/kendo-react-form";
 import { Button } from "@progress/kendo-react-buttons";
 import { FormInput, FormCheckbox } from "./formComponents";
 import {
+  userNameValidator,
   firstNameValidator,
   lastNameValidator,
   totalFirstAndLastNameValidator,
@@ -12,21 +13,7 @@ import { usersOperations, usersSelectors } from "../../redux/users";
 
 export const FormNewUser = ({ onClose }) => {
   const dispatch = useDispatch();
-
-  // UserNameValidator
   const userNameList = useSelector(usersSelectors.getUserNameList);
-  const userNameRegex = new RegExp(/^[a-zA-Z0-9]+$/);
-  const userNameValidator = (value) =>
-    !value
-      ? "User Name is required"
-      : value.length > 15
-      ? "User Name should be no more then 15 characters long"
-      : !userNameRegex.test(value)
-      ? "Only alphanumeric characters"
-      : userNameList.includes(value.toLowerCase())
-      ? "User Name should be unique"
-      : "";
-  // UserNameValidator
 
   const handleSubmit = (dataItem) => {
     const { firstName, lastName } = dataItem;
@@ -65,7 +52,7 @@ export const FormNewUser = ({ onClose }) => {
               name={"userName"}
               label={"User Name"}
               component={FormInput}
-              validator={userNameValidator}
+              validator={(value) => userNameValidator(value, userNameList)}
             />
             <Field
               id={"firstName"}

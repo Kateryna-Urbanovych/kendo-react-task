@@ -1,12 +1,11 @@
 import React, { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { useLocation } from "react-router-dom";
 import { Grid, GridColumn as Column } from "@progress/kendo-react-grid";
 import { Typography } from "@progress/kendo-react-common";
 import { DialogUpdateUser } from "../../components/Dialog/DialogUpdateUser";
-
-// import { users } from "../UserListPage/users";
-// const activeUserId = 1;
-// const activeUser = users.find((user) => user.id === activeUserId);
+import { usersOperations, usersSelectors } from "../../redux/users";
+import NothingHere from "../../images/nothing-here.jpg";
 
 const EditCommandCell = (props) => {
   return (
@@ -22,32 +21,40 @@ const EditCommandCell = (props) => {
 };
 
 export const UserDetailPage = () => {
+  const dispatch = useDispatch();
+
   const location = useLocation();
-  const activeUser = location.state;
-  const { userName, lastLogin } = activeUser;
+  console.log("location", location);
+
+  const users = useSelector(usersSelectors.getUpdatedUsers);
+  const activeUserId = location.state;
+  const activeUser = users.find((user) => user.id === activeUserId);
+  console.log(activeUser);
 
   const [openFormUpdate, setOpenFormUpdate] = useState(false);
   const [data, setData] = useState(activeUser);
+  // editItem
   // const [editItem, setEditItem] = useState({
   //   ProductID: 1,
   // });
 
   const handleSubmit = (event) => {
-    console.log("eventSubmitFormUpdate", event);
-    // let newData = data.map((item) => {
-    //   if (event.ProductID === item.ProductID) {
-    //     item = { ...event };
-    //   }
-
-    //   return item = {...event};
-    // });
-    let newData = { ...event };
+    let newData = {
+      ...event,
+      fullName: `${event.firstName} ${event.lastName}`,
+      lastLogin: Date.now(),
+      enabled: event.enabled ? "Yes" : "No",
+    };
     setData(newData);
+    dispatch(
+      usersOperations.updateUser({ ...newData, enabled: event.enabled })
+    );
     setOpenFormUpdate(false);
   };
 
   const enterEdit = (item) => {
     setOpenFormUpdate(true);
+    // editItem
     // setEditItem(item);
   };
 
@@ -61,35 +68,50 @@ export const UserDetailPage = () => {
 
   return (
     <>
-      <div
-        style={{
-          marginTop: "30px",
-          textAlign: "center",
-        }}
-      >
-        <Typography.h1>{userName}</Typography.h1>
-        <Typography.h5>({lastLogin})</Typography.h5>
-      </div>
+      {activeUser ? (
+        <>
+          <div
+            style={{
+              marginTop: "30px",
+              textAlign: "center",
+            }}
+          >
+            <Typography.h1>{activeUser.userName}</Typography.h1>
+            <Typography.h5>({activeUser.lastLogin})</Typography.h5>
+          </div>
 
-      <Grid
-        style={{
-          fontSize: "20px",
-        }}
-        rowHeight={50}
-        data={[activeUser]}
-      >
-        <Column field='firstName' title='First Name' />
-        <Column field='lastName' title='Last Name' />
-        <Column field='enabled' title='Enabled' />
-        <Column cell={MyEditCommandCell} />
-      </Grid>
+          <Grid
+            style={{
+              fontSize: "20px",
+            }}
+            rowHeight={50}
+            data={[data]}
+          >
+            <Column field='firstName' title='First Name' />
+            <Column field='lastName' title='Last Name' />
+            <Column field='enabled' title='Enabled' />
+            <Column cell={MyEditCommandCell} />
+          </Grid>
 
-      {openFormUpdate && (
-        <DialogUpdateUser
-          cancelEdit={handleCancelEdit}
-          onSubmit={handleSubmit}
-          item={data}
-        />
+          {openFormUpdate && (
+            <DialogUpdateUser
+              cancelEdit={handleCancelEdit}
+              onSubmit={handleSubmit}
+              item={data}
+            />
+          )}
+        </>
+      ) : (
+        <Typography.h1>
+          <img
+            src={NothingHere}
+            alt='Nothing Here'
+            style={{
+              marginLeft: "15vw",
+              width: "50%",
+            }}
+          />
+        </Typography.h1>
       )}
     </>
   );

@@ -1,3 +1,15 @@
+const userNameRegex = new RegExp(/^[a-zA-Z0-9]+$/);
+export const userNameValidator = (value, userNameList) =>
+  !value
+    ? "User Name is required"
+    : value.length > 15
+    ? "User Name should be no more then 15 characters long"
+    : !userNameRegex.test(value)
+    ? "Only alphanumeric characters"
+    : userNameList.includes(value.toLowerCase())
+    ? "User Name should be unique"
+    : "";
+
 export const firstNameValidator = (value) =>
   !value
     ? "First Name is required"
