@@ -3,8 +3,16 @@ import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { Grid, GridColumn as Column } from "@progress/kendo-react-grid";
 import { process } from "@progress/kendo-data-query";
-import { Sort, SortFilter } from "./columnMenu";
 import { usersSelectors } from "../../redux/users";
+
+const filterOperators = {
+  text: [
+    {
+      text: "grid.filterContainsOperator",
+      operator: "contains",
+    },
+  ],
+};
 
 const rowRender = (trElement, props) => {
   const enabled = props.dataItem.enabled;
@@ -30,15 +38,10 @@ export const UserListPage = () => {
 
   const [dataState, setDataState] = useState({
     sort: [{ field: "id", dir: "asc" }],
-    take: 10,
-    skip: 0,
   });
 
   return (
     <>
-      {/* Displays no users */}
-      {/* {users.length === 0 && <h1>No users</h1>} */}
-
       <Grid
         style={{
           maxHeight: "1500px",
@@ -53,40 +56,20 @@ export const UserListPage = () => {
         }}
         sortable={true}
         filterable={true}
+        filterOperators={filterOperators}
         onRowClick={(e) => navigate("/detail", { state: e.dataItem.id })}
         rowRender={rowRender}
       >
-        <Column
-          field='id'
-          title='User ID'
-          width='150px'
-          // columnMenu={Sort}
-          filterable={false}
-        />
-        <Column
-          field='userName'
-          title='User Name'
-          filter={"text"}
-          // columnMenu={SortFilter}
-        />
-        <Column
-          field='fullName'
-          title='Full Name'
-          // columnMenu={Sort}
-          filterable={false}
-        />
+        <Column field='id' title='User ID' width='150px' filterable={false} />
+        <Column field='userName' title='User Name' />
+        <Column field='fullName' title='Full Name' filterable={false} />
         <Column
           field='lastLogin'
           title='Last Login'
-          // columnMenu={Sort}
           filterable={false}
+          data-dateformat='dddd MMM dd, yyyy hh:mmtt'
         />
-        <Column
-          field='enabled'
-          title='Enabled'
-          // columnMenu={Sort}
-          filterable={false}
-        />
+        <Column field='enabled' title='Enabled' filterable={false} />
       </Grid>
     </>
   );

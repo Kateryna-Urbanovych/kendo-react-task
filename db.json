@@ -6,7 +6,7 @@
       "firstName": "Leon",
       "lastName": "Matis",
       "fullName": "Leon Matis",
-      "lastLogin": 1644692863443,
+      "lastLogin": "2022-02-13 13:52",
       "enabled": true
     },
     {
@@ -15,7 +15,7 @@
       "firstName": "Bryan",
       "lastName": "Sanchez",
       "fullName": "Bryan Sanchez",
-      "lastLogin": "05.02.2022",
+      "lastLogin": "2022-02-05 17:03",
       "enabled": false
     },
     {
@@ -24,7 +24,7 @@
       "firstName": "Kenley",
       "lastName": "Anderson",
       "fullName": "Kenley Anderson",
-      "lastLogin": "01.02.2022",
+      "lastLogin": "2022-01-14 09:38",
       "enabled": true
     },
     {
@@ -33,7 +33,7 @@
       "firstName": "Oriana",
       "lastName": "Price",
       "fullName": "Oriana Price",
-      "lastLogin": "20.01.2022",
+      "lastLogin": "2022-01-08 18:46",
       "enabled": true
     },
     {
@@ -42,7 +42,7 @@
       "firstName": "Gabrielle",
       "lastName": "Ross",
       "fullName": "Gabrielle Ross",
-      "lastLogin": "10.01.2022",
+      "lastLogin": "2022-02-02 11:16",
       "enabled": false
     },
     {
@@ -51,17 +51,17 @@
       "lastName": "urb",
       "enabled": true,
       "fullName": "kate urb",
-      "lastLogin": 1644690392021,
+      "lastLogin": "2022-02-11 12:02",
       "id": 6
     },
     {
       "userName": "qwe",
-      "firstName": "qwe",
+      "firstName": "wqe",
       "lastName": "qwe",
-      "enabled": true,
-      "fullName": "qwe qwe",
-      "lastLogin": 1644698382118,
-      "id": 7
+      "fullName": "wqe qwe",
+      "lastLogin": "2022-02-13 02:03",
+      "id": 7,
+      "enabled": true
     }
   ]
 }

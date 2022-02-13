@@ -1,5 +1,6 @@
 import React from "react";
 import { useSelector, useDispatch } from "react-redux";
+import { formatDate } from "@telerik/kendo-intl";
 import { Form, Field, FormElement } from "@progress/kendo-react-form";
 import { Button } from "@progress/kendo-react-buttons";
 import { FormInput, FormCheckbox } from "./formComponents";
@@ -21,7 +22,7 @@ export const FormNewUser = ({ onClose }) => {
     const newUser = {
       ...dataItem,
       fullName: `${firstName} ${lastName}`,
-      lastLogin: Date.now(),
+      lastLogin: formatDate(new Date(), "yyyy-MM-dd HH:mm"),
     };
 
     dispatch(usersOperations.addUser(newUser));

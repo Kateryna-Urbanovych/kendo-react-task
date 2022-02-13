@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useLocation } from "react-router-dom";
+import { formatDate } from "@telerik/kendo-intl";
 import { Grid, GridColumn as Column } from "@progress/kendo-react-grid";
 import { Typography } from "@progress/kendo-react-common";
 import { DialogUpdateUser } from "../../components/Dialog/DialogUpdateUser";
@@ -42,7 +43,7 @@ export const UserDetailPage = () => {
     let newData = {
       ...event,
       fullName: `${event.firstName} ${event.lastName}`,
-      lastLogin: Date.now(),
+      lastLogin: formatDate(new Date(), "yyyy-MM-dd HH:mm"),
       enabled: event.enabled ? "Yes" : "No",
     };
     setData(newData);
