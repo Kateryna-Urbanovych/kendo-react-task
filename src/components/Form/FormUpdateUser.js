@@ -1,6 +1,6 @@
 import React from "react";
 import { Form, Field, FormElement } from "@progress/kendo-react-form";
-import { FormInput, FormCheckbox } from "./formComponents";
+import { FormInput, FormUpdateCheckbox } from "./formComponents";
 import {
   firstNameValidator,
   lastNameValidator,
@@ -51,14 +51,13 @@ export const FormUpdateUser = ({ cancelEdit, onSubmit, item }) => {
               id={"enabled"}
               name={"enabled"}
               label={"Enabled"}
-              component={FormCheckbox}
+              component={FormUpdateCheckbox}
             />
           </fieldset>
           <div className='k-form-buttons'>
             <button
               type={"submit"}
               className='k-button k-button-md k-rounded-md k-button-solid k-button-solid-primary'
-              disabled={!formRenderProps.allowSubmit}
             >
               Update User
             </button>

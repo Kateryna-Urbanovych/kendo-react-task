@@ -25,19 +25,13 @@ export const UserDetailPage = () => {
   const dispatch = useDispatch();
 
   const location = useLocation();
-  console.log("location", location);
+  const activeUserId = location.state;
 
   const users = useSelector(usersSelectors.getUpdatedUsers);
-  const activeUserId = location.state;
   const activeUser = users.find((user) => user.id === activeUserId);
-  console.log(activeUser);
 
   const [openFormUpdate, setOpenFormUpdate] = useState(false);
   const [data, setData] = useState(activeUser);
-  // editItem
-  // const [editItem, setEditItem] = useState({
-  //   ProductID: 1,
-  // });
 
   const handleSubmit = (event) => {
     let newData = {
@@ -55,8 +49,6 @@ export const UserDetailPage = () => {
 
   const enterEdit = (item) => {
     setOpenFormUpdate(true);
-    // editItem
-    // setEditItem(item);
   };
 
   const handleCancelEdit = () => {

@@ -1,9 +1,9 @@
-import React from "react";
+import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { formatDate } from "@telerik/kendo-intl";
 import { Form, Field, FormElement } from "@progress/kendo-react-form";
 import { Button } from "@progress/kendo-react-buttons";
-import { FormInput, FormCheckbox } from "./formComponents";
+import { FormInput, FormCreateCheckbox } from "./formComponents";
 import {
   userNameValidator,
   firstNameValidator,
@@ -16,6 +16,8 @@ export const FormNewUser = ({ onClose }) => {
   const dispatch = useDispatch();
   const userNameList = useSelector(usersSelectors.getUserNameList);
 
+  const [isEnabledChecked, setIsEnabledChecked] = useState(false);
+
   const handleSubmit = (dataItem) => {
     const { firstName, lastName } = dataItem;
 
@@ -23,6 +25,7 @@ export const FormNewUser = ({ onClose }) => {
       ...dataItem,
       fullName: `${firstName} ${lastName}`,
       lastLogin: formatDate(new Date(), "yyyy-MM-dd HH:mm"),
+      enabled: isEnabledChecked,
     };
 
     dispatch(usersOperations.addUser(newUser));
@@ -73,15 +76,12 @@ export const FormNewUser = ({ onClose }) => {
               id={"enabled"}
               name={"enabled"}
               label={"Enabled"}
-              component={FormCheckbox}
+              setIsEnabledChecked={setIsEnabledChecked}
+              component={FormCreateCheckbox}
             />
           </fieldset>
           <div className='k-form-buttons'>
-            <Button
-              themeColor={"primary"}
-              type={"submit"}
-              disabled={!formRenderProps.allowSubmit}
-            >
+            <Button themeColor={"primary"} type={"submit"}>
               Create New User
             </Button>
             <Button onClick={formRenderProps.onFormReset}>Clear</Button>

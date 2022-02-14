@@ -31,11 +31,7 @@ const updateUser = createAsyncThunk(
   "users/updateUser",
   async (updatedUser, { rejectWithValue }) => {
     try {
-      console.log("updatedUser", updatedUser);
-      const { data } = await axios.patch(
-        `/users/${updatedUser.id}`,
-        updatedUser
-      );
+      const { data } = await axios.put(`/users/${updatedUser.id}`, updatedUser);
       return data;
     } catch (error) {
       return rejectWithValue(error);

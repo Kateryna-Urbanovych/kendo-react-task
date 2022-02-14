@@ -13,6 +13,7 @@
     "@progress/kendo-react-inputs": "^5.0.1",
     "@progress/kendo-react-labels": "^5.0.1",
     "@progress/kendo-react-layout": "^5.0.1",
+    "@progress/kendo-react-treeview": "^5.0.1",
     "@progress/kendo-theme-default": "^5.1.1",
     "@reduxjs/toolkit": "^1.7.2",
     "@telerik/kendo-intl": "^2.3.0",
