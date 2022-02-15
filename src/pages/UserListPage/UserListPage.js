@@ -5,6 +5,7 @@ import { Grid, GridColumn as Column } from "@progress/kendo-react-grid";
 import { process } from "@progress/kendo-data-query";
 import { usersSelectors } from "../../redux/users";
 import { loadingPanel } from "../../components/Loader/loadingPanel";
+import { errorNotification } from "../../components/Notification/Notification";
 
 const filterOperators = {
   text: [
@@ -41,7 +42,7 @@ export const UserListPage = () => {
 
   useEffect(() => {
     if (error) {
-      alert("Sorry, something went wrong!");
+      errorNotification();
       navigate("/error");
     }
   }, [error, navigate]);
