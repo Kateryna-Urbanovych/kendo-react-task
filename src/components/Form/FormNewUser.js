@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { formatDate } from "@telerik/kendo-intl";
 import { Form, Field, FormElement } from "@progress/kendo-react-form";
@@ -11,8 +12,10 @@ import {
   totalFirstAndLastNameValidator,
 } from "./validator";
 import { usersOperations, usersSelectors } from "../../redux/users";
+import { successCreateNotification } from "../Notification/Notification";
 
 export const FormNewUser = ({ onClose }) => {
+  const navigate = useNavigate();
   const dispatch = useDispatch();
   const userNameList = useSelector(usersSelectors.getUserNameList);
 
@@ -30,6 +33,8 @@ export const FormNewUser = ({ onClose }) => {
 
     dispatch(usersOperations.addUser(newUser));
     onClose(false);
+    navigate("/");
+    setTimeout(successCreateNotification, 1500);
   };
 
   return (

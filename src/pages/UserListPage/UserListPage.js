@@ -1,9 +1,10 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { Grid, GridColumn as Column } from "@progress/kendo-react-grid";
 import { process } from "@progress/kendo-data-query";
 import { usersSelectors } from "../../redux/users";
+import { loadingPanel } from "../../components/Loader/loadingPanel";
 
 const filterOperators = {
   text: [
@@ -34,7 +35,16 @@ const rowRender = (trElement, props) => {
 
 export const UserListPage = () => {
   const navigate = useNavigate();
+  const loading = useSelector(usersSelectors.getLoading);
+  const error = useSelector(usersSelectors.getError);
   const initialUsers = useSelector(usersSelectors.getUpdatedUsers);
+
+  useEffect(() => {
+    if (error) {
+      alert("Sorry, something went wrong!");
+      navigate("/error");
+    }
+  }, [error, navigate]);
 
   const [dataState, setDataState] = useState({
     sort: [{ field: "id", dir: "asc" }],
@@ -42,6 +52,8 @@ export const UserListPage = () => {
 
   return (
     <>
+      {loading && loadingPanel}
+
       <Grid
         style={{
           maxHeight: "1500px",

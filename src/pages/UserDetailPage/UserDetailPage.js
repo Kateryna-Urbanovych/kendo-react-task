@@ -1,12 +1,17 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { formatDate } from "@telerik/kendo-intl";
 import { Grid, GridColumn as Column } from "@progress/kendo-react-grid";
 import { Typography } from "@progress/kendo-react-common";
 import { DialogUpdateUser } from "../../components/Dialog/DialogUpdateUser";
 import { usersOperations, usersSelectors } from "../../redux/users";
+import { loadingPanel } from "../../components/Loader/loadingPanel";
 import NothingHere from "../../images/nothing-here.jpg";
+import {
+  successUpdateNotification,
+  errorNotification,
+} from "../../components/Notification/Notification";
 
 const EditCommandCell = (props) => {
   return (
@@ -22,7 +27,10 @@ const EditCommandCell = (props) => {
 };
 
 export const UserDetailPage = () => {
+  const navigate = useNavigate();
   const dispatch = useDispatch();
+  const loading = useSelector(usersSelectors.getLoading);
+  const error = useSelector(usersSelectors.getError);
 
   const location = useLocation();
   const activeUserId = location.state;
@@ -32,6 +40,13 @@ export const UserDetailPage = () => {
 
   const [openFormUpdate, setOpenFormUpdate] = useState(false);
   const [data, setData] = useState(activeUser);
+
+  useEffect(() => {
+    if (error) {
+      errorNotification();
+      navigate("/error");
+    }
+  }, [error, navigate]);
 
   const handleSubmit = (event) => {
     let newData = {
@@ -45,6 +60,7 @@ export const UserDetailPage = () => {
       usersOperations.updateUser({ ...newData, enabled: event.enabled })
     );
     setOpenFormUpdate(false);
+    setTimeout(successUpdateNotification, 1500);
   };
 
   const enterEdit = (item) => {
@@ -61,6 +77,8 @@ export const UserDetailPage = () => {
 
   return (
     <>
+      {loading && loadingPanel}
+
       {activeUser ? (
         <>
           <div
@@ -95,16 +113,24 @@ export const UserDetailPage = () => {
           )}
         </>
       ) : (
-        <Typography.h1>
+        <>
+          <Typography.h2
+            style={{
+              marginTop: "15px",
+              textAlign: "center",
+            }}
+          >
+            Please, select some User...
+          </Typography.h2>
           <img
             src={NothingHere}
             alt='Nothing Here'
             style={{
-              marginLeft: "15vw",
+              marginLeft: "18vw",
               width: "50%",
             }}
           />
-        </Typography.h1>
+        </>
       )}
     </>
   );
