@@ -1,0 +1,22 @@
+ul {
+  font-size: 30px;
+  font-weight: 700;
+  list-style-type: none;
+  padding: 10px;
+  margin: 0;
+  display: flex;
+}
+
+li {
+  margin: 0 30px;
+
+  &:hover,
+  &:focus {
+    cursor: pointer;
+    color: #84cef1;
+  }
+}
+
+.activeLink {
+  color: #84cef1;
+}

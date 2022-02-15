@@ -1,0 +1,49 @@
+{
+  "users": [
+    {
+      "id": 1,
+      "userName": "Leon",
+      "firstName": "Leon",
+      "lastName": "Matis",
+      "fullName": "Leon Matis",
+      "lastLogin": "2022-02-15 01:55",
+      "enabled": true
+    },
+    {
+      "id": 2,
+      "userName": "Bryan",
+      "firstName": "Bryan",
+      "lastName": "Sanchez",
+      "fullName": "Bryan Sanchez",
+      "lastLogin": "2022-02-14 23:24",
+      "enabled": false
+    },
+    {
+      "id": 3,
+      "userName": "Kenley",
+      "firstName": "Kenley",
+      "lastName": "Anderson",
+      "fullName": "Kenley Anderson",
+      "lastLogin": "2022-01-14 09:38",
+      "enabled": true
+    },
+    {
+      "id": 4,
+      "userName": "Oriana",
+      "firstName": "Oriana",
+      "lastName": "Price",
+      "fullName": "Oriana Price",
+      "lastLogin": "2022-01-08 18:46",
+      "enabled": true
+    },
+    {
+      "id": 5,
+      "userName": "Gabrielle",
+      "firstName": "Gabrielle",
+      "lastName": "Ross",
+      "fullName": "Gabrielle Ross",
+      "lastLogin": "2022-02-02 11:16",
+      "enabled": false
+    }
+  ]
+}

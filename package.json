@@ -1,0 +1,58 @@
+{
+  "name": "kendo-react-task",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "@progress/kendo-data-query": "^1.5.5",
+    "@progress/kendo-licensing": "^1.2.2",
+    "@progress/kendo-react-buttons": "^5.0.1",
+    "@progress/kendo-react-common": "^5.0.1",
+    "@progress/kendo-react-dialogs": "^5.0.1",
+    "@progress/kendo-react-form": "^5.0.1",
+    "@progress/kendo-react-grid": "^5.0.1",
+    "@progress/kendo-react-inputs": "^5.0.1",
+    "@progress/kendo-react-labels": "^5.0.1",
+    "@progress/kendo-react-layout": "^5.0.1",
+    "@progress/kendo-react-treeview": "^5.0.1",
+    "@progress/kendo-theme-default": "^5.1.1",
+    "@reduxjs/toolkit": "^1.7.2",
+    "@telerik/kendo-intl": "^2.3.0",
+    "@testing-library/jest-dom": "^5.16.2",
+    "@testing-library/react": "^12.1.2",
+    "@testing-library/user-event": "^13.5.0",
+    "axios": "^0.25.0",
+    "json-server": "^0.17.0",
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2",
+    "react-redux": "^7.2.6",
+    "react-router-dom": "^6.2.1",
+    "react-scripts": "5.0.0",
+    "react-toastify": "^8.2.0",
+    "redux": "^4.1.2",
+    "redux-persist": "^6.0.0",
+    "sass": "^1.49.7"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "api-server": "json-server --port 5050 --delay 1000 --watch db.json"
+  },
+  "eslintConfig": {
+    "extends": [
+      "react-app",
+      "react-app/jest"
+    ]
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  }
+}
